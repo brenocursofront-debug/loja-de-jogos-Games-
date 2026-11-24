@@ -1,0 +1,2077 @@
+/* ==========================================================================
+   ECLIPZ — FOLHA DE ESTILOS
+   Índice:
+   1. Variáveis (tema)      6. Botões e ícones
+   2. Base                  7. Catálogo (chips, grade, cards)
+   3. Cabeçalho             8. Gaveta do carrinho e modal
+   4. Destaque (hero)       9. Biblioteca, toast e rodapé
+   5. Preços               10. Responsivo e movimento reduzido
+   ========================================================================== */
+
+
+/* 1. VARIÁVEIS ------------------------------------------------------------ */
+@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap');
+
+:root {
+  --bg: #0b1118;
+  --surface: #121d27;
+  --surface-2: #1a2a37;
+  --line: #293d4c;
+  --fg: #edf4f8;
+  --muted: #9aabba;
+  --accent: #f8523c;
+  --accent-fg: #062421;
+  --deal: #f4c15b;
+  --deal-fg: #2c1d00;
+  
+
+  --shadow-soft: 0 18px 50px rgba(0, 0, 0, .22);
+  --shadow-card: 0 10px 28px rgba(0, 0, 0, .16);
+
+  --font-display: "Familjen Grotesk", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Figtree", "Segoe UI", system-ui, sans-serif;
+  --font-data: "JetBrains Mono", ui-monospace, "SF Mono", Consolas, monospace;
+
+  color-scheme: dark;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* O tema é controlado pelo botão e não pelo sistema operacional. */
+:root[data-theme="light"] {
+  --bg: #eef2f6;
+  --surface: #ffffff;
+  --surface-2: #e4ebf1;
+  --line: #cfd9e2;
+  --fg: #122029;
+  --muted: #4f6070;
+  --accent: #0b7d74;
+  --accent-fg: #ffffff;
+  --deal: #f2b84b;
+  --deal-fg: #2b1d00;
+  color-scheme: light;
+}
+
+
+/* 2. BASE ----------------------------------------------------------------- */
+
+* {
+  box-sizing: border-box;
+}
+.cor_da_letra{
+ background: linear-gradient(90deg, #ff3131 0%, #ff914d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: bold;
+}
+
+
+
+
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+}
+body {
+  margin: 0;
+  padding: 0;
+  background:
+    radial-gradient(ellipse at 12% -8%, rgba(74, 190, 179, .10), transparent 34rem),
+    radial-gradient(ellipse at 92% 8%, rgba(242, 184, 75, .07), transparent 28rem),
+    var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  background: var(--surface);
+  z-index: 40;
+}
+img {
+  max-width: 100%;
+ 
+  
+  
+}
+h1, h2, h3 {
+  font-family: var(--font-display);
+  line-height: 1.15;
+  margin: 0;
+  text-wrap: balance;
+}
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+a {
+  color: inherit;
+}
+[hidden]:not([hidden=until-found i]) {
+  display: none !important;
+}
+::selection {
+  background: rgba(101, 223, 209, .28);
+  color: var(--fg);
+}
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Só para leitores de tela */
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.wrap {
+  max-width: 1320px;
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+main {
+  padding-block: 32px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+.row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+
+/* 3. CABEÇALHO ------------------------------------------------------------ */
+
+.top {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 30;
+  background: rgba(18, 29, 39, .88);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(101, 223, 209, .14);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .12);
+  
+}
+.top-in {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 26px;
+  min-height: 72px;
+  padding-block: 12px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-family: var(--font-display); 
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: -.045em;
+}
+.brand img {
+  width: 42px;
+  height: 42px;
+  display: block;
+  object-fit: contain;
+}
+
+.nav {
+  display: flex;
+  gap: 4px;
+}
+.nav a {
+  text-decoration: none;
+  padding: 7px 12px;
+  border-radius: 6px;
+  color: var(--muted);
+  font-weight: 500;
+  transition: color .18s ease, background .18s ease;
+}
+.nav a:hover,
+.nav a[aria-current="page"] {
+  color: var(--fg);
+  background: var(--surface-2);
+}
+.nav .n {
+  font-family: var(--font-data);
+  font-size: 12px;
+  color: var(--accent);
+  margin-left: 4px;
+}
+
+.search {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+.search input {
+  width: 100%;
+  color: var(--fg);
+  font: inherit;
+}
+.search input::placeholder {
+  color: var(--muted);
+}
+
+/* Campos de texto e select compartilham o mesmo visual */
+.search input,
+select {
+  background: rgba(7, 14, 20, .58);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 9px 12px;
+  transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.search input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(101, 223, 209, .13);
+}
+select {
+  color: var(--fg);
+  font: inherit;
+  padding: 8px 10px;
+  max-width: 100%;
+}
+
+.cart-btn {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 9px 14px;
+  font-weight: 600;
+}
+.cart-btn .count {
+  font-family: var(--font-data);
+  background: var(--accent-fg);
+  color: var(--accent);
+  border-radius: 99px;
+  min-width: 22px;
+  height: 22px;
+  display: inline-grid;
+  place-items: center;
+  font-size: 12px;
+  padding-inline: 6px;
+}
+
+.theme-btn,
+.account-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 40px;
+  padding: 8px 11px;
+  color: var(--muted);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-weight: 600;
+  transition: color .18s ease, border-color .18s ease, background .18s ease, transform .18s ease;
+}
+.theme-btn:hover,
+.account-btn:hover {
+  color: var(--fg);
+  border-color: var(--accent);
+  background: var(--surface-2);
+  transform: translateY(-1px);
+}
+.theme-icon,
+.account-icon {
+  color: var(--accent);
+  font-size: 17px;
+  line-height: 1;
+}
+.account-btn {
+  color: var(--accent-fg);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.account-btn:hover {
+  color: var(--accent-fg);
+  background: var(--accent);
+  filter: brightness(1.08);
+}
+.account-btn .account-icon {
+  color: currentColor;
+}
+
+
+/* 4. DESTAQUE (HERO) ------------------------------------------------------ */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 16px;
+  padding: 12px;
+  border: 1px solid rgba(101, 223, 209, .14);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 8% 18%, rgba(101, 223, 209, .16), transparent 30%),
+    radial-gradient(circle at 96% 4%, rgba(244, 193, 91, .13), transparent 28%),
+    linear-gradient(135deg, rgba(18, 29, 39, .96), rgba(11, 17, 24, .78));
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .16);
+}
+.stage {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  min-height: 280px;
+  max-width: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .10);
+  border-radius: 16px;
+  box-shadow: var(--shadow-soft);
+  background:
+    radial-gradient(circle at 70% 30%, rgba(101, 223, 209, .14), transparent 36%),
+    var(--surface-2);
+}
+.stage .art-fill {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: var(--surface-2);
+}
+.stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(4, 10, 16, .96) 0%, rgba(4, 10, 16, .56) 42%, rgba(4, 10, 16, .04) 100%);
+}
+.stage-info {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: clamp(20px, 3vw, 34px);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 24px;
+  align-items: flex-end;
+  justify-content: space-between;
+  color: #f4f8fb;
+}
+.stage-info .txt {
+  max-width: 520px;
+  min-width: 0;
+}
+.stage-info h1 {
+  font-size: clamp(28px, 4.2vw, 46px);
+  letter-spacing: -.02em;
+  text-shadow: 0 3px 24px rgba(0, 0, 0, .28);
+}
+.stage-info p {
+  margin: 8px 0 0;
+  color: #d3dde6;
+}
+.stage-info .tags {
+  font-family: var(--font-data);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: #8df1e5;
+  margin-bottom: 8px;
+}
+.stage-buy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+.stage .was {
+  color: #b6c4d0;
+}
+.stage .btn.ghost {
+  color: #f4f8fb;
+  border-color: rgba(255, 255, 255, .45);
+}
+
+/* Lista lateral de destaques */
+.picks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.picks li {
+  flex: 1;
+  display: flex;
+}
+.pick {
+  width: 100%;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px;
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+.pick:hover {
+  background: var(--surface-2);
+  transform: translateX(3px);
+}
+.pick[aria-current="true"] {
+  border-color: var(--accent);
+  background: var(--surface-2);
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+.pick .thumb {
+  width: 84px;
+  aspect-ratio: 16 / 9;
+  flex: none;
+  border-radius: 7px;
+  overflow: hidden;
+  background: var(--surface-2);
+}
+.pick strong {
+  font-family: var(--font-display);
+  font-size: 15px;
+  display: block;
+}
+.pick small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+
+/* 5. PREÇOS --------------------------------------------------------------- */
+
+.price {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-family: var(--font-data);
+}
+.badge {
+  background: var(--deal);
+  color: var(--deal-fg);
+  font-weight: 700;
+  font-size: 13px;
+  padding: 3px 7px;
+  border-radius: 4px;
+}
+.was {
+  color: var(--muted);
+  text-decoration: line-through;
+  font-size: 12px;
+}
+.now {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+
+/* 6. BOTÕES E ÍCONES ------------------------------------------------------ */
+
+.cart-btn,
+.btn {
+  background: var(--accent);
+  color: var(--accent-fg);
+  border: 0;
+  border-radius: 10px;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, .14);
+  transition: transform .18s ease, filter .18s ease, box-shadow .18s ease;
+}
+.btn {
+  padding: 10px 16px;
+  font-weight: 600;
+}
+.cart-btn:hover,
+.btn:not(:disabled):hover {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+  box-shadow: 0 9px 22px rgba(0, 0, 0, .22);
+}
+.btn[disabled] {
+  background: var(--surface-2);
+  color: var(--muted);
+  cursor: default;
+  filter: none;
+}
+.btn.ghost {
+  background: transparent;
+  color: var(--fg);
+  border: 1px solid var(--line);
+  box-shadow: none;
+}
+.btn.ghost:hover {
+  background: var(--surface-2);
+}
+
+.icon-btn {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  flex: none;
+  transition: color .18s ease, border-color .18s ease, background .18s ease, transform .18s ease;
+}
+.icon-btn:hover {
+  color: var(--fg);
+  transform: translateY(-1px);
+}
+.icon-btn[aria-pressed="true"] {
+  color: var(--deal);
+  border-color: var(--deal);
+}
+.icon-btn svg {
+  width: 18px;
+  height: 18px;
+}
+/* Coração preenchido quando o jogo está na lista de desejos */
+.icon-btn[aria-pressed="true"] svg path {
+  fill: currentColor;
+}
+
+
+/* 7. CATÁLOGO ------------------------------------------------------------- */
+
+.shelf-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+.shelf-head h2 {
+  font-size: clamp(25px, 3vw, 32px);
+  letter-spacing: -.035em;
+}
+.shelf-head .sub {
+  display: inline-block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-family: var(--font-data);
+  font-size: 12px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-bottom: 18px;
+}
+.chip {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 15px;
+  color: var(--muted);
+  font-weight: 500;
+  transition: background .18s ease, color .18s ease, border-color .18s ease, transform .18s ease;
+}
+.chip:hover {
+  color: var(--fg);
+  transform: translateY(-1px);
+}
+.chip[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-fg);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 245px), 1fr));
+  gap: 18px;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid rgba(151, 178, 196, .16);
+  border-radius: 14px;
+  box-shadow: var(--shadow-card);
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(101, 223, 209, .52);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, .28);
+}
+.card .art {
+  display: block;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  background: var(--surface-2);
+}
+.card .art img {
+  transition: filter .25s ease;
+}
+.card:hover .art img {
+  filter: brightness(1.08) saturate(1.08);
+}
+.card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 15px;
+}
+.card h3 {
+  font-size: 18px;
+  letter-spacing: -.02em;
+}
+.link {
+  background: none;
+  border: 0;
+  padding: 0;
+  text-align: left;
+  font: inherit;
+}
+.link:hover {
+  color: var(--accent);
+}
+.meta {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.rating {
+  font-family: var(--font-data);
+  font-size: 12px;
+  letter-spacing: .02em;
+  color: var(--accent);
+}
+.buy {
+  margin-top: auto;
+  padding-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+}
+.empty {
+  text-align: center;
+  color: var(--muted);
+  padding: 40px 0;
+}
+
+
+/* 8. GAVETA DO CARRINHO E MODAL ------------------------------------------- */
+
+.scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(2, 7, 12, .72);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+}
+
+/* Gaveta */
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 60;
+  width: min(420px, 100%);
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(160deg, var(--surface), #0e1720 80%);
+  border-left: 1px solid var(--line);
+  box-shadow: -24px 0 70px rgba(0, 0, 0, .34);
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.drawer-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  border-bottom: 1px solid rgba(151, 178, 196, .16);
+}
+.drawer-head h2 {
+  font-size: 20px;
+  letter-spacing: -.025em;
+}
+.drawer-list {
+  list-style: none;
+  margin: 0;
+  padding: 8px 16px;
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  flex: 1;
+  overflow-y: auto;
+}
+.drawer-foot {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  border-top: 1px solid rgba(151, 178, 196, .16);
+}
+.total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--font-data);
+}
+.total strong {
+  font-size: 20px;
+}
+.fine {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+.line-item {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+.line-item .thumb {
+  width: 92px;
+  aspect-ratio: 16 / 9;
+  flex: none;
+  border-radius: 7px;
+  overflow: hidden;
+  background: var(--surface-2);
+}
+.line-item .info {
+  flex: 1;
+  min-width: 0;
+}
+.line-item strong {
+  display: block;
+  font-family: var(--font-display);
+}
+
+/* Modal de detalhes */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  overflow-y: auto;
+}
+.account-overlay {
+  z-index: 70;
+}
+.account-sheet {
+  position: relative;
+  width: min(430px, 100%);
+  padding: clamp(22px, 4vw, 34px);
+  color: var(--fg);
+  background: var(--surface);
+  border: 1px solid rgba(101, 223, 209, .25);
+  border-radius: 18px;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, .48);
+}
+.account-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 22px;
+  line-height: 1;
+}
+.account-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+  padding-right: 30px;
+  margin-bottom: 24px;
+}
+.account-heading h2 {
+  font-size: 25px;
+  letter-spacing: -.035em;
+}
+.account-heading p {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+.account-mark {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  flex: none;
+  color: var(--accent-fg);
+  background: var(--accent);
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 20px;
+}
+.account-form {
+  display: grid;
+  gap: 8px;
+}
+.account-form label {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+.account-form input {
+  width: 100%;
+  padding: 11px 12px;
+  color: var(--fg);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font: inherit;
+}
+.account-form input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(101, 223, 209, .13);
+}
+.account-form .btn {
+  width: 100%;
+  margin-top: 13px;
+}
+.account-switch {
+  margin: 14px 0 0;
+  color: var(--muted);
+  text-align: center;
+  font-size: 13px;
+}
+.account-switch button {
+  padding: 0;
+  color: var(--accent);
+  background: none;
+  border: 0;
+  font: inherit;
+  font-weight: 600;
+}
+.account-switch button:hover {
+  text-decoration: underline;
+}
+.account-logout {
+  width: 100%;
+}
+.sheet {
+  position: relative;
+  width: min(860px, 100%);
+  max-height: 100%;
+  overflow: hidden auto;
+  background: var(--surface);
+  border: 1px solid rgba(151, 178, 196, .22);
+  border-radius: 16px;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, .45);
+}
+.sheet .cover {
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  background: var(--surface-2);
+  display: grid;
+  place-items: center;
+}
+.sheet .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(4, 10, 16, .65);
+  color: #f4f8fb;
+  border-color: rgba(255, 255, 255, .3);
+}
+.sheet-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 250px;
+  gap: 22px;
+  padding: clamp(18px, 3vw, 28px);
+}
+.sheet-body h2 {
+  font-size: 32px;
+  letter-spacing: -.04em;
+  margin-bottom: 8px;
+}
+.sheet-body p {
+  margin: 0 0 12px;
+  max-width: 65ch;
+}
+.specs {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 12px;
+  align-self: start;
+  font-size: 13px;
+}
+.specs dt {
+  color: var(--muted);
+}
+.specs dd {
+  margin: 0;
+  text-align: right;
+  align-self: center;
+  font-family: var(--font-data);
+  font-size: 12px;
+}
+.buybox {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+}
+.specs,
+.buybox {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px;
+}
+
+/* Capas completas: preserva a proporção e não corta personagens ou texto */
+.art-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  object-position: center;
+  background: var(--surface-2);
+}
+.stage .art-img {
+  position: relative;
+  z-index: 0;
+}
+
+
+/* 9. BIBLIOTECA, TOAST E RODAPÉ ------------------------------------------- */
+
+.lib-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.lib-item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  padding: 10px;
+  background: var(--surface);
+  border: 1px solid rgba(151, 178, 196, .16);
+  border-radius: 12px;
+  transition: border-color .18s ease, transform .18s ease;
+}
+.lib-item:hover {
+  border-color: rgba(101, 223, 209, .42);
+  transform: translateY(-1px);
+}
+.lib-item .thumb {
+  width: 150px;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  flex: none;
+  border-radius: 7px;
+  overflow: hidden;
+  background: var(--surface-2);
+}
+.lib-item .info {
+  flex: 1 1 200px;
+  min-width: 0;
+}
+.lib-item strong {
+  font-family: var(--font-display);
+  font-size: 18px;
+}
+.lib-act {
+  min-width: 120px;
+}
+.bar {
+  height: 6px;
+  margin-top: 8px;
+  background: var(--surface-2);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.bar i {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  z-index: 80;
+  max-width: calc(100% - 32px);
+  padding: 10px 16px;
+  background: var(--fg);
+  color: var(--bg);
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 999px;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, .28);
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 20px);
+  transition: opacity .2s, transform .2s;
+}
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.site-footer {
+  margin-top: 12px;
+  padding-top: 42px;
+  padding-bottom: calc(22px + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid rgba(101, 223, 209, .16);
+  background:
+    radial-gradient(circle at 12% 0%, rgba(101, 223, 209, .08), transparent 28rem),
+    linear-gradient(180deg, rgba(18, 29, 39, .82), rgba(11, 17, 24, .98));
+  color: var(--muted);
+  font-size: 13px;
+}
+.footer-main {
+  display: grid;
+  grid-template-columns: minmax(260px, 1.5fr) minmax(140px, .7fr) minmax(240px, 1fr);
+  gap: 36px;
+  padding-bottom: 30px;
+}
+.footer-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--fg);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -.04em;
+}
+.footer-logo img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+.footer-brand p {
+  max-width: 390px;
+  margin: 14px 0 0;
+  line-height: 1.65;
+}
+.footer-brand .footer-note {
+  color: color-mix(in srgb, var(--muted) 76%, transparent);
+  font-size: 12px;
+}
+.footer-nav,
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9px;
+}
+.footer-nav h2,
+.footer-contact h2 {
+  margin: 0 0 5px;
+  color: var(--fg);
+  font-size: 15px;
+  letter-spacing: .01em;
+}
+.footer-nav a,
+.footer-contact > a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color .18s ease, transform .18s ease;
+}
+.footer-nav a:hover,
+.footer-contact > a:hover {
+  color: var(--accent);
+  transform: translateX(2px);
+}
+.socials {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+.social {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .03);
+  font-size: 19px;
+  text-decoration: none;
+  transition: transform .22s cubic-bezier(.34, 1.56, .64, 1), background .2s ease, border-color .2s ease, color .2s ease, box-shadow .2s ease;
+}
+.social i {
+  display: block;
+  line-height: 1;
+}
+.social img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: brightness(0.85);
+  transition: filter .2s ease;
+}
+.social:hover img {
+  filter: brightness(1.2);
+}
+.social:hover {
+  transform: translateY(-3px) scale(1.08);
+}
+.social-instagram:hover {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 6px 18px rgba(214, 36, 159, .45);
+}
+.social-youtube:hover {
+  background: #ff0000;
+  color: #ffffff;
+  border-color: #ff0000;
+  box-shadow: 0 6px 18px rgba(255, 0, 0, .45);
+}
+.social-discord:hover {
+  background: #5865F2;
+  color: #ffffff;
+  border-color: #5865F2;
+  box-shadow: 0 6px 18px rgba(88, 101, 242, .45);
+}
+.social-whatsapp:hover {
+  background: #25D366;
+  color: #ffffff;
+  border-color: #25D366;
+  box-shadow: 0 6px 18px rgba(37, 211, 102, .45);
+}
+.social-steam:hover {
+  background: linear-gradient(135deg, #171a21, #1b2838 50%, #2a475e);
+  color: #66c0f4;
+  border-color: #66c0f4;
+  box-shadow: 0 6px 18px rgba(102, 192, 244, .45);
+}
+.social-x:hover {
+  background: #000000;
+  color: #ffffff;
+  border-color: #555555;
+  box-shadow: 0 6px 18px rgba(255, 255, 255, .25);
+}
+.social-twitch:hover {
+  background: #9146FF;
+  color: #ffffff;
+  border-color: #9146FF;
+  box-shadow: 0 6px 18px rgba(145, 70, 255, .45);
+}
+.social svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.social svg path {
+  fill: currentColor;
+  stroke: none;
+}
+.social svg .solid,
+.social svg .fill {
+  fill: currentColor;
+  stroke: none;
+}
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(151, 178, 196, .14);
+  color: color-mix(in srgb, var(--muted) 82%, transparent);
+  font-size: 12px;
+}
+
+
+/* 10. RESPONSIVO E MOVIMENTO REDUZIDO ------------------------------------- */
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .footer-main {
+    grid-template-columns: minmax(0, 1.3fr) minmax(150px, .7fr);
+  }
+  .footer-contact {
+    grid-column: 1 / -1;
+  }
+  .picks {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .stage {
+    aspect-ratio: auto;
+    min-height: 340px;
+  }
+}
+
+@media (max-width: 720px) {
+  .hero {
+    padding: 8px;
+    border-radius: 18px;
+  }
+  .top-in {
+    gap: 10px 14px;
+    padding-block: 10px;
+  }
+  .brand {
+    font-size: 21px;
+  }
+  .nav a {
+    padding-inline: 9px;
+  }
+  .search {
+    order: 5;
+    flex-basis: 100%;
+  }
+  main {
+    gap: 36px;
+    padding-top: 22px;
+  }
+  .stage {
+    min-height: 360px;
+  }
+  .stage-info {
+    gap: 12px;
+  }
+  .stage-buy {
+    align-items: flex-start;
+    width: 100%;
+  }
+  .footer-main {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .footer-contact {
+    grid-column: auto;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    gap: 5px;
+  }
+}
+
+@media (max-width: 700px) {
+  .sheet-body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .sheet .cover {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (max-width: 480px) {
+  .wrap {
+    padding-inline: 14px;
+  }
+  .picks {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .stage {
+    min-height: 390px;
+  }
+  .hero {
+    padding: 6px;
+    border-radius: 16px;
+  }
+  .stage-info {
+    padding: 18px;
+  }
+  .stage-info h1 {
+    font-size: 30px;
+  }
+  .stage-buy .row {
+    width: 100%;
+  }
+  .stage-buy .row .btn {
+    flex: 1;
+  }
+  .grid {
+    gap: 14px;
+  }
+  .card-body {
+    padding: 13px;
+  }
+  .buy {
+    align-items: flex-end;
+  }
+  .lib-item {
+    align-items: flex-start;
+  }
+  .lib-act {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+
+/* ==========================================================================
+   FUNDO ANIMADO GAMER — AMBIENTE RETRO-FUTURISTA COM NÉBULAS, GRID E PARTÍCULAS
+   ========================================================================== */
+body { isolation: isolate; }
+.eclipz-ambient {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 90%, rgba(13, 30, 48, .85) 0%, transparent 60%),
+    radial-gradient(ellipse at 15% 25%, rgba(0, 213, 255, .08) 0%, transparent 40%),
+    radial-gradient(ellipse at 85% 35%, rgba(248, 82, 60, .07) 0%, transparent 42%),
+    var(--bg);
+  transition: background .3s ease;
+}
+
+/* Orbes e nebulas cósmicas animadas com movimento orgânico */
+.ambient-nebula {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(85px);
+  opacity: .55;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+.nebula-1 {
+  width: 580px;
+  height: 580px;
+  top: -140px;
+  left: 8%;
+  background: radial-gradient(circle, rgba(0, 229, 255, .32) 0%, rgba(16, 78, 139, .15) 50%, transparent 75%);
+  animation: float-nebula-1 22s ease-in-out infinite alternate;
+}
+.nebula-2 {
+  width: 650px;
+  height: 650px;
+  top: 32%;
+  right: -120px;
+  background: radial-gradient(circle, rgba(248, 82, 60, .26) 0%, rgba(138, 43, 226, .18) 45%, transparent 70%);
+  animation: float-nebula-2 26s ease-in-out infinite alternate;
+}
+.nebula-3 {
+  width: 500px;
+  height: 500px;
+  bottom: 8%;
+  left: 22%;
+  background: radial-gradient(circle, rgba(38, 208, 124, .18) 0%, rgba(0, 168, 255, .15) 50%, transparent 75%);
+  animation: float-nebula-3 20s ease-in-out infinite alternate;
+}
+
+@keyframes float-nebula-1 {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(80px, 60px, 0) scale(1.15); }
+  100% { transform: translate3d(-50px, 110px, 0) scale(0.95); }
+}
+@keyframes float-nebula-2 {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(-100px, -70px, 0) scale(1.2); }
+  100% { transform: translate3d(-40px, 90px, 0) scale(1.05); }
+}
+@keyframes float-nebula-3 {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(90px, -80px, 0) scale(1.1); }
+  100% { transform: translate3d(-70px, -40px, 0) scale(0.9); }
+}
+
+/* Partículas e estrelas cósmicas flutuando */
+.eclipz-pixel-field {
+  position: absolute;
+  inset: -60px;
+  opacity: .75;
+  background-image:
+    radial-gradient(circle, rgba(0, 229, 255, .95) 1.2px, transparent 1.6px),
+    radial-gradient(circle, rgba(248, 82, 60, .85) 1.4px, transparent 1.8px),
+    radial-gradient(circle, rgba(255, 255, 255, .9) 1px, transparent 1.5px),
+    radial-gradient(circle, rgba(164, 208, 7, .85) 1.2px, transparent 1.6px);
+  background-size: 85px 85px, 140px 140px, 195px 195px, 260px 260px;
+  background-position: 12px 18px, 45px 72px, 95px 30px, 170px 110px;
+  mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 85%, transparent);
+  animation: eclipz-stars-float 35s linear infinite;
+}
+
+@keyframes eclipz-stars-float {
+  from { transform: translateY(0); }
+  to { transform: translateY(-300px); }
+}
+
+/* Grid holográfico em perspectiva com efeito neon */
+.eclipz-grid-floor {
+  position: absolute;
+  left: -25%;
+  bottom: -32%;
+  width: 150%;
+  height: 65%;
+  transform: perspective(400px) rotateX(66deg);
+  transform-origin: center top;
+  background-image:
+    linear-gradient(rgba(0, 213, 255, .25) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 213, 255, .25) 1px, transparent 1px);
+  background-size: 50px 38px;
+  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.75) 15%, #000 65%, transparent 100%);
+  filter: drop-shadow(0 -5px 15px rgba(0, 213, 255, .3));
+  animation: eclipz-grid-scroll 2.8s linear infinite;
+}
+
+/* Rastros dinâmicos de luz e feixes de laser */
+.eclipz-light-trail {
+  position: absolute;
+  inset: 0;
+  opacity: .65;
+  background:
+    linear-gradient(115deg, transparent 0 24%, rgba(0, 229, 255, .35) 24.1%, transparent 24.3% 100%) 0 0 / 100% 100% no-repeat,
+    linear-gradient(115deg, transparent 0 68%, rgba(248, 82, 60, .28) 68.1%, transparent 68.3% 100%) 0 0 / 100% 100% no-repeat,
+    linear-gradient(90deg, transparent, rgba(0, 229, 255, .45), transparent) 0 0 / 28% 2px no-repeat,
+    linear-gradient(90deg, transparent, rgba(248, 82, 60, .4), transparent) 0 0 / 22% 2px no-repeat;
+  background-position: 0 0, 0 0, -35% 32%, 115% 62%;
+  animation: eclipz-data-runs 8s cubic-bezier(.4, 0, .2, 1) infinite;
+}
+
+:root[data-theme="light"] .eclipz-ambient {
+  background:
+    radial-gradient(ellipse at 50% 90%, rgba(200, 220, 240, .6) 0%, transparent 60%),
+    radial-gradient(ellipse at 15% 25%, rgba(0, 180, 220, .08) 0%, transparent 40%),
+    radial-gradient(ellipse at 85% 35%, rgba(248, 82, 60, .05) 0%, transparent 42%),
+    var(--bg);
+}
+:root[data-theme="light"] .ambient-nebula { opacity: .22; mix-blend-mode: multiply; }
+:root[data-theme="light"] .eclipz-pixel-field { opacity: .3; }
+:root[data-theme="light"] .eclipz-grid-floor { opacity: .35; }
+:root[data-theme="light"] .eclipz-light-trail { opacity: .25; }
+
+@keyframes eclipz-grid-scroll {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 0 38px, 50px 0; }
+}
+@keyframes eclipz-data-runs {
+  0% { background-position: 0 0, 0 0, -35% 32%, 115% 62%; }
+  100% { background-position: 0 0, 0 0, 135% 32%, -35% 62%; }
+}
+@media (max-width: 700px) {
+  .eclipz-grid-floor { bottom: -28%; height: 58%; background-size: 42px 34px; }
+  .eclipz-pixel-field { opacity: .48; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ambient-nebula, .eclipz-pixel-field, .eclipz-grid-floor, .eclipz-light-trail { animation: none !important; }
+}
+
+
+/* ==========================================================================
+   ESTILOS INSPIRADOS NA STEAM (PARA JOGOS.HTML E CATÁLOGO)
+   ========================================================================== */
+.steam-subnav {
+  background: linear-gradient(90deg, rgba(23, 38, 54, 0.95), rgba(30, 54, 76, 0.95));
+  border-bottom: 1px solid rgba(102, 192, 244, 0.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  padding: 8px 0;
+  margin-bottom: 24px;
+}
+.steam-subnav-in {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-block: 4px;
+}
+.steam-sublink {
+  color: #b8b6b4;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: all .2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.steam-sublink:hover,
+.steam-sublink.active {
+  color: #ffffff;
+  background: rgba(102, 192, 244, 0.22);
+}
+.steam-sublink.active {
+  border-bottom: 2px solid #66c0f4;
+}
+
+/* Banner de destaque Steam (Hero Spotlight) */
+.steam-spotlight {
+  background: linear-gradient(135deg, rgba(14, 25, 36, 0.95), rgba(22, 38, 54, 0.95));
+  border: 1px solid rgba(102, 192, 244, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+  padding: 20px;
+  margin-bottom: 36px;
+  position: relative;
+  overflow: hidden;
+}
+.steam-spotlight-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 10px;
+}
+.steam-spotlight-title h2 {
+  font-size: 22px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.steam-spotlight-title h2 i {
+  color: #66c0f4;
+}
+.steam-spotlight-badge {
+  background: #a4d007;
+  color: #111;
+  font-weight: 700;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.steam-spotlight-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 20px;
+}
+.steam-spotlight-media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+.steam-spotlight-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .4s ease;
+}
+.steam-spotlight-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+}
+.steam-spotlight-info h3 {
+  font-size: 26px;
+  color: #fff;
+  line-height: 1.2;
+}
+.steam-spotlight-thumbs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.steam-spotlight-thumb {
+  aspect-ratio: 16 / 9;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid transparent;
+  opacity: .7;
+  transition: all .2s ease;
+}
+.steam-spotlight-thumb:hover,
+.steam-spotlight-thumb.active {
+  opacity: 1;
+  border-color: #66c0f4;
+  transform: scale(1.04);
+}
+.steam-spotlight-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.steam-spotlight-meta {
+  font-size: 13px;
+  color: #8f98a0;
+  line-height: 1.6;
+}
+.steam-spotlight-meta strong {
+  color: #c6d4df;
+}
+.steam-review-badge {
+  display: inline-block;
+  color: #66c0f4;
+  font-weight: 600;
+  font-size: 13px;
+}
+.steam-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+.steam-tag {
+  background: rgba(103, 193, 245, 0.15);
+  color: #67c1f5;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 3px;
+  text-decoration: none;
+}
+.steam-tag:hover {
+  background: rgba(103, 193, 245, 0.3);
+}
+
+/* Preço e Botão Steam */
+.steam-price-block {
+  display: flex;
+  align-items: center;
+  background: #000000;
+  border-radius: 4px;
+  overflow: hidden;
+  width: fit-content;
+}
+.steam-discount-tag {
+  background: #4c6b22;
+  color: #a4d007;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 6px 10px;
+  line-height: 1;
+}
+.steam-price-values {
+  padding: 6px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.steam-old-price {
+  font-size: 11px;
+  color: #738895;
+  text-decoration: line-through;
+  line-height: 1;
+}
+.steam-final-price {
+  font-size: 15px;
+  font-weight: 700;
+  color: #c6d4df;
+  line-height: 1.2;
+}
+.steam-final-price.free {
+  color: #a4d007;
+}
+
+.steam-buy-btn {
+  background: linear-gradient(90deg, #75b022 0%, #588a1b 100%);
+  color: #d2efa9;
+  border: 0;
+  padding: 9px 16px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: all .2s ease;
+}
+.steam-buy-btn:hover {
+  background: linear-gradient(90deg, #8ed029 0%, #68a320 100%);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+.steam-btn-ghost {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #c6d4df;
+  padding: 8px 14px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 13px;
+  transition: all .2s ease;
+}
+.steam-btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+}
+
+/* Abas de navegação estilo Steam */
+.steam-tabs {
+  display: flex;
+  gap: 2px;
+  border-bottom: 2px solid #2a475e;
+  margin-bottom: 24px;
+  overflow-x: auto;
+}
+.steam-tab {
+  background: rgba(23, 38, 54, 0.7);
+  border: 0;
+  color: #c6d4df;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 4px 4px 0 0;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all .2s ease;
+}
+.steam-tab:hover {
+  background: #2a475e;
+  color: #fff;
+}
+.steam-tab.active {
+  background: #2a475e;
+  color: #66c0f4;
+  border-top: 2px solid #66c0f4;
+}
+
+/* Layout 2 Colunas da Steam */
+.steam-layout {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+
+/* Sidebar de filtros Steam */
+.steam-sidebar {
+  background: rgba(18, 29, 41, 0.85);
+  border: 1px solid rgba(102, 192, 244, 0.15);
+  border-radius: 8px;
+  padding: 18px;
+  position: sticky;
+  top: 90px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+.steam-sidebar-section {
+  margin-bottom: 22px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.steam-sidebar-section:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.steam-sidebar-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #66c0f4;
+  letter-spacing: .06em;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.steam-filter-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.steam-filter-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #b8b6b4;
+  background: transparent;
+  border: 1px solid transparent;
+  transition: all .18s ease;
+}
+.steam-filter-item:hover {
+  background: rgba(102, 192, 244, 0.12);
+  color: #ffffff;
+}
+.steam-filter-item.active {
+  background: rgba(102, 192, 244, 0.22);
+  color: #66c0f4;
+  border-color: rgba(102, 192, 244, 0.35);
+  font-weight: 600;
+}
+.steam-filter-item .count {
+  font-family: var(--font-data);
+  font-size: 11px;
+  color: #707e8a;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+
+/* Controles de visualização e cabeçalho da grade Steam */
+.steam-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: rgba(22, 34, 46, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 12px 18px;
+  margin-bottom: 20px;
+}
+.steam-results-badge {
+  font-size: 14px;
+  color: #c6d4df;
+}
+.steam-results-badge strong {
+  color: #66c0f4;
+}
+.steam-view-toggles {
+  display: flex;
+  gap: 4px;
+}
+.steam-view-btn {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #8f98a0;
+  width: 34px;
+  height: 34px;
+  border-radius: 4px;
+  display: grid;
+  place-items: center;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all .18s ease;
+}
+.steam-view-btn:hover,
+.steam-view-btn.active {
+  color: #ffffff;
+  background: #2a475e;
+  border-color: #66c0f4;
+}
+
+/* Modo Lista Steam (Horizontal) */
+.steam-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.steam-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(22, 34, 46, 0.7);
+  border: 1px solid rgba(102, 192, 244, 0.1);
+  border-radius: 6px;
+  padding: 10px 14px;
+  transition: all .2s ease;
+  position: relative;
+}
+.steam-row:hover {
+  background: rgba(30, 48, 66, 0.95);
+  border-color: rgba(102, 192, 244, 0.4);
+  transform: translateX(4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+.steam-row-capsule {
+  width: 130px;
+  aspect-ratio: 16 / 9;
+  flex: none;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #000;
+  cursor: pointer;
+}
+.steam-row-capsule img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+}
+.steam-row:hover .steam-row-capsule img {
+  transform: scale(1.05);
+}
+.steam-row-details {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.steam-row-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #c7d5e0;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color .2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.steam-row:hover .steam-row-title {
+  color: #66c0f4;
+}
+.steam-row-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  color: #707e8a;
+  flex-wrap: wrap;
+}
+.steam-row-platforms {
+  display: inline-flex;
+  gap: 6px;
+  color: #8f98a0;
+  font-size: 13px;
+}
+.steam-row-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: none;
+}
+
+/* Modo Grade Steam */
+.steam-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 18px;
+}
+.steam-card {
+  background: rgba(22, 34, 46, 0.75);
+  border: 1px solid rgba(102, 192, 244, 0.12);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all .25s ease;
+}
+.steam-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(102, 192, 244, 0.45);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+.steam-card-thumb {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  cursor: pointer;
+  overflow: hidden;
+}
+.steam-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .3s ease;
+}
+.steam-card:hover .steam-card-thumb img {
+  transform: scale(1.06);
+}
+.steam-card-body {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 8px;
+}
+.steam-card-body h3 {
+  font-size: 16px;
+  color: #c7d5e0;
+  cursor: pointer;
+}
+.steam-card:hover h3 {
+  color: #66c0f4;
+}
+.steam-card-foot {
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+@media (max-width: 950px) {
+  .steam-spotlight-grid {
+    grid-template-columns: 1fr;
+  }
+  .steam-layout {
+    grid-template-columns: 1fr;
+  }
+  .steam-sidebar {
+    position: static;
+  }
+}
+@media (max-width: 650px) {
+  .steam-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .steam-row-capsule {
+    width: 100%;
+  }
+  .steam-row-right {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 8px;
+  }
+}

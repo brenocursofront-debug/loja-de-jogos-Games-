@@ -1,1 +1,426 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Descubra, explore e organize seus jogos favoritos na Eclipz.">
+  <meta name="theme-color" content="#0b1118">
+  <title>Eclipz Games </title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;700&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="./img/favicon/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <div class="eclipz-ambient" aria-hidden="true">
+    <div class="ambient-nebula nebula-1"></div>
+    <div class="ambient-nebula nebula-2"></div>
+    <div class="ambient-nebula nebula-3"></div>
+    <span class="eclipz-pixel-field"></span>
+    <span class="eclipz-grid-floor"></span>
+    <span class="eclipz-light-trail"></span>
+  </div>
+
+  <!-- Cabeçalho -->
+  <header class="top">
+    <div class="wrap top-in">
+      <a class="brand" href="#loja" aria-label="Eclipz, página inicial">
+        <img src="./img/logo.svg" alt="" >
+        <span class="cor_da_letra">Eclipz Games</span> 
+      </a>
+
+      <nav class="nav" aria-label="Seções">
+        <a href="#loja" id="nav-loja">Loja</a>
+        <a href="jogos.html" id="nav-jogos" style="color: #ff2727; font-weight: 600;"><img src="./img/logo.svg" alt="" aria-hidden="true" style="width: 18px; height: 18px; object-fit: contain; vertical-align: middle; margin-right: 4px;">Todos os Jogos </a>
+        <a href="#biblioteca" id="nav-biblioteca">Biblioteca<span class="n" id="libCount"></span></a>
+      </nav>
+
+      <div class="search">
+        <label class="sr" for="q">Buscar jogos</label>
+        <input id="q" type="search" placeholder="Buscar por jogo, gênero ou estúdio" autocomplete="off">
+      </div>
+
+      <button class="cart-btn" id="cartBtn" type="button" aria-haspopup="dialog" aria-controls="drawer" aria-expanded="false">
+        Carrinho <span class="count" id="cartCount">0</span>
+      </button>
+
+      <button class="theme-btn" id="themeBtn" type="button" aria-label="Mudar para tema claro" title="Mudar para tema claro">
+        <span class="theme-icon" aria-hidden="true">☼</span>
+        <span class="theme-label">Tema</span>
+      </button>
+
+      <button class="account-btn" id="accountBtn" type="button" aria-haspopup="dialog" aria-controls="accountModal">
+        <span class="account-icon" aria-hidden="true">◉</span>
+        <span id="accountLabel">Entrar</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Loja -->
+  <main class="wrap" id="view-loja">
+    <section class="hero" aria-label="Jogos em destaque">
+      <div class="stage" id="stage"></div>
+      <ol class="picks" id="picks"></ol>
+    </section>
+
+    <!-- Banner de chamada do catálogo Eclipz -->
+    <div style="background: linear-gradient(135deg, rgba(16, 29, 44, 0.95), rgba(26, 47, 68, 0.95)); border: 1px solid rgba(102, 192, 244, 0.35); border-radius: 14px; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.35);">
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <div style="width: 52px; height: 52px; border-radius: 12px; background: rgba(102, 192, 244, 0.15); display: grid; place-items: center; font-size: 28px; color: #66c0f4; flex-shrink: 0;">
+          <img src="./img/logo.svg" alt="" aria-hidden="true" style="width: 28px; height: 28px; object-fit: contain;">
+        </div>
+        <div>
+          <strong style="color: #ffffff; font-size: 18px; display: flex; align-items: center; gap: 8px;">
+            
+            <span style="background: #a4d007; color: #111; font-size: 11px; padding: 2px 7px; border-radius: 3px; font-weight: 700; text-transform: uppercase;">Novo</span>
+          </strong>
+          <span style="color: #b8b6b4; font-size: 14px;">Acesse a página com todos os jogos, incluindo os novos <strong>FIFA 26</strong>, <strong>FIFA 27</strong>, GTA VI, filtros avançados e modo Lista Eclipz.</span>
+        </div>
+      </div>
+      <a href="jogos.html" class="btn" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; font-weight: 700; background: #66c0f4; color: #081a2b;">
+        <img src="./img/logo.svg" alt="" aria-hidden="true" style="width: 28px; height: 28px; object-fit: contain;"> Abrir Catálogo Eclipz <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <section aria-labelledby="catalogo-t">
+      <div class="shelf-head">
+        <div>
+          <h2 id="catalogo-t">Catálogo</h2>
+          <span class="sub" id="resultCount"></span>
+        </div>
+        <div class="row">
+          <label for="sort" class="sub">Ordenar por</label>
+          <select id="sort">
+            <option value="rel">Destaques</option>
+            <option value="preco">Menor preço</option>
+            <option value="desc">Maior desconto</option>
+            <option value="nota">Melhor avaliação</option>
+            <option value="az">Nome (A–Z)</option>
+          </select>
+        </div>
+      </div>
+      <div class="chips" id="chips" role="group" aria-label="Filtrar por categoria"></div>
+      <div class="grid" id="grid"></div>
+      <p class="empty" id="empty" hidden>Nenhum jogo encontrado. Tente outra busca ou limpe o filtro.</p>
+    </section>
+  </main>
+
+  <!-- Biblioteca -->
+  <main class="wrap" id="view-biblioteca" hidden>
+    <section aria-labelledby="lib-t">
+      <div class="shelf-head">
+        <div>
+          <h2 id="lib-t">Sua biblioteca</h2>
+          <span class="sub" id="libSub"></span>
+        </div>
+      </div>
+      <ul class="lib-list" id="libList"></ul>
+      <p class="empty" id="libEmpty" hidden>Você ainda não tem jogos. Compre algo na loja e ele aparece aqui.</p>
+    </section>
+  </main>
+
+  
+
+  <!-- Carrinho (gaveta) -->
+  <div id="scrim" class="scrim" hidden></div>
+  <aside id="drawer" class="drawer" role="dialog" aria-modal="true" aria-labelledby="cartTitle" hidden>
+    <div class="drawer-head">
+      <h2 id="cartTitle">Seu carrinho</h2>
+      <button class="icon-btn" type="button" data-act="close" aria-label="Fechar carrinho">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <ul class="drawer-list" id="cartList"></ul>
+    <div class="drawer-foot">
+      <div class="total"><span>Total</span><strong id="cartTotal">R$ 0,00</strong></div>
+      <button class="btn" type="button" id="checkout" data-act="checkout">Finalizar compra</button>
+      <p class="fine">Compra simulada: nada é cobrado e os jogos vão direto para a biblioteca.</p>
+    </div>
+  </aside>
+
+  <!-- Detalhes do jogo (modal) -->
+  <div id="modal" class="overlay" hidden>
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="mTitle" id="sheet"></div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- Login demonstrativo: substitua por uma API/backend para autenticação real. -->
+  <div id="accountModal" class="overlay account-overlay" hidden>
+    <div class="account-sheet" role="dialog" aria-modal="true" aria-labelledby="accountTitle">
+      <button class="icon-btn account-close" id="accountClose" type="button" aria-label="Fechar login">×</button>
+      <div id="loginView">
+        <div class="account-heading">
+          <span class="account-mark" aria-hidden="true">◉</span>
+          <div>
+            <h2 id="accountTitle">Entrar na Eclipz</h2>
+            <p>Acesse sua biblioteca e sua lista de desejos.</p>
+          </div>
+        </div>
+        <form id="loginForm" class="account-form">
+          <label for="loginEmail">E-mail</label>
+          <input id="loginEmail" name="email" type="email" autocomplete="email" placeholder="voce@exemplo.com" required>
+          <label for="loginPassword">Senha</label>
+          <input id="loginPassword" name="password" type="password" autocomplete="current-password" placeholder="Mínimo de 6 caracteres" minlength="6" required>
+          <button class="btn" type="submit">Entrar</button>
+          <p class="account-switch">Ainda não tem uma conta? <button type="button" id="showRegister">Criar conta</button></p>
+        </form>
+      </div>
+      <div id="registerView" hidden>
+        <div class="account-heading">
+          <span class="account-mark" aria-hidden="true">+</span>
+          <div>
+            <h2>Criar sua conta</h2>
+            <p>Guarde sua biblioteca neste navegador.</p>
+          </div>
+        </div>
+        <form id="registerForm" class="account-form">
+          <label for="registerName">Nome</label>
+          <input id="registerName" name="name" type="text" autocomplete="name" placeholder="Seu nome" required>
+          <label for="registerEmail">E-mail</label>
+          <input id="registerEmail" name="email" type="email" autocomplete="email" placeholder="voce@exemplo.com" required>
+          <label for="registerPassword">Senha</label>
+          <input id="registerPassword" name="password" type="password" autocomplete="new-password" placeholder="Mínimo de 6 caracteres" minlength="6" required>
+          <button class="btn" type="submit">Criar conta</button>
+          <p class="account-switch">Já tem uma conta? <button type="button" id="showLogin">Voltar para entrar</button></p>
+        </form>
+      </div>
+      <div id="accountLogged" hidden>
+        <div class="account-heading">
+          <span class="account-mark" aria-hidden="true">✓</span>
+          <div>
+            <h2>Você está conectado</h2>
+            <p id="loggedUser"></p>
+          </div>
+        </div>
+        <button class="btn ghost account-logout" id="logoutBtn" type="button">Sair da conta</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       MODELOS (templates)
+       O script.js clona estes blocos e preenche os campos:
+         data-text="chave"            -> texto do elemento
+         data-attr="atributo:chave"   -> atributos (separe vários com ;)
+         data-width="chave"           -> largura em % (barra de progresso)
+         data-slot="chave"            -> o elemento é trocado por outro modelo
+       Para mudar o visual, edite aqui. A lógica fica no script.js.
+       ====================================================================== -->
+
+  <!-- Preços -->
+  <template id="tpl-price-free">
+    <span class="price"><span class="now">Grátis</span></span>
+  </template>
+
+  <template id="tpl-price-off">
+    <span class="price">
+      <span class="badge" data-text="off"></span>
+      <span class="was" data-text="was"></span>
+      <span class="now" data-text="now"></span>
+    </span>
+  </template>
+
+  <template id="tpl-price">
+    <span class="price"><span class="now" data-text="now"></span></span>
+  </template>
+
+  <!-- Botões de compra e desejo -->
+  <template id="tpl-btn-owned">
+    <button class="btn" type="button" disabled>Na biblioteca</button>
+  </template>
+
+  <template id="tpl-btn-incart">
+    <button class="btn ghost" type="button" data-act="cart">No carrinho</button>
+  </template>
+
+  <template id="tpl-btn-add">
+    <button class="btn" type="button" data-act="add" data-attr="data-id:id" data-text="label"></button>
+  </template>
+
+  <template id="tpl-wish">
+    <button class="icon-btn" type="button" data-act="wish" data-attr="data-id:id;aria-pressed:pressed;aria-label:label">
+      <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.6-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.4-9.5 9-9.5 9z" fill="none"/></svg>
+    </button>
+  </template>
+
+  <!-- Destaque (hero) -->
+  <template id="tpl-stage">
+    <div class="art-fill"><img class="art-img" data-attr="src:img" alt=""></div>
+    <div class="stage-info">
+      <div class="txt">
+        <div class="tags" data-text="tags"></div>
+        <h1 data-text="title"></h1>
+        <p data-text="short"></p>
+      </div>
+      <div class="stage-buy">
+        <span data-slot="price"></span>
+        <div class="row">
+          <button class="btn ghost" type="button" data-act="open" data-attr="data-id:id">Ver detalhes</button>
+          <span data-slot="add"></span>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <template id="tpl-pick">
+    <li>
+      <button class="pick" type="button" data-act="hero" data-attr="data-i:index;aria-current:current">
+        <span class="thumb"><img class="art-img" data-attr="src:img" alt="" loading="lazy"></span>
+        <span><strong data-text="title"></strong><small data-text="genres"></small></span>
+      </button>
+    </li>
+  </template>
+
+  <!-- Catálogo -->
+  <template id="tpl-chip">
+    <button class="chip" type="button" data-act="chip" data-attr="data-id:id;aria-pressed:pressed" data-text="label"></button>
+  </template>
+
+  <template id="tpl-card">
+    <article class="card">
+      <button class="art" type="button" data-act="open" data-attr="data-id:id;aria-label:openLabel">
+        <img class="art-img" data-attr="src:img" alt="" loading="lazy">
+      </button>
+      <div class="card-body">
+        <h3><button class="link" type="button" data-act="open" data-attr="data-id:id" data-text="title"></button></h3>
+        <p class="meta" data-text="genres"></p>
+        <p class="meta" data-text="platforms"></p>
+        <span class="rating" data-text="ratingShort"></span>
+        <div class="buy">
+          <span data-slot="price"></span>
+          <div class="row"><span data-slot="wish"></span><span data-slot="add"></span></div>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <!-- Carrinho -->
+  <template id="tpl-cart-item">
+    <li class="line-item">
+      <span class="thumb"><img class="art-img" data-attr="src:img" alt="" loading="lazy"></span>
+      <div class="info"><strong data-text="title"></strong><span data-slot="price"></span></div>
+      <button class="icon-btn" type="button" data-act="remove" data-attr="data-id:id;aria-label:removeLabel">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </li>
+  </template>
+
+  <template id="tpl-cart-empty">
+    <li class="empty">Seu carrinho está vazio.<br>Adicione jogos pela loja.</li>
+  </template>
+
+  <!-- Biblioteca -->
+  <template id="tpl-lib-item">
+    <li class="lib-item">
+      <span class="thumb"><img class="art-img" data-attr="src:img" alt="" loading="lazy"></span>
+      <div class="info">
+        <strong data-text="title"></strong>
+        <div class="meta" data-text="devMeta"></div>
+        <span data-slot="progress"></span>
+      </div>
+      <span data-slot="action"></span>
+    </li>
+  </template>
+
+  <template id="tpl-lib-play">
+    <button class="btn lib-act" type="button" data-act="play" data-attr="data-id:id">Jogar</button>
+  </template>
+
+  <template id="tpl-lib-installing">
+    <button class="btn lib-act" type="button" disabled>Instalando…</button>
+  </template>
+
+  <template id="tpl-lib-install">
+    <button class="btn ghost lib-act" type="button" data-act="install" data-attr="data-id:id">Instalar</button>
+  </template>
+
+  <template id="tpl-lib-progress">
+    <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" data-attr="aria-valuenow:value"><i data-width="value"></i></div>
+  </template>
+
+  <!-- Detalhes do jogo (modal) -->
+  <template id="tpl-modal">
+    <button class="icon-btn close" type="button" data-act="close" aria-label="Fechar detalhes">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="cover"><img class="art-img" data-attr="src:img" alt=""></div>
+    <div class="sheet-body">
+      <div>
+        <h2 id="mTitle" data-text="title"></h2>
+        <p class="meta" data-text="genres"></p>
+        <p data-text="short"></p>
+        <p data-text="desc"></p>
+      </div>
+      <dl class="specs">
+        <dt>Estúdio</dt><dd data-text="dev"></dd>
+        <dt>Lançamento</dt><dd data-text="year"></dd>
+        <dt>Avaliações</dt><dd data-text="ratingPct"></dd>
+        <dt>Resumo</dt><dd data-text="ratingLabel"></dd>
+        <dt>Gêneros</dt><dd data-text="genresComma"></dd>
+        <dt>Plataformas</dt><dd data-text="platforms"></dd>
+      </dl>
+      <div class="buybox">
+        <span data-slot="price"></span>
+        <div class="row"><span data-slot="wish"></span><span data-slot="add"></span></div>
+      </div>
+    </div>
+  </template>
+  <footer class="site-footer">
+    <div class="wrap footer-main">
+      <div class="footer-brand">
+        <a class="footer-logo" href="#loja" aria-label="Eclipz, voltar para a loja">
+          <img src="./img/logo.svg" alt="Eclipz">
+          <span class="cor_da_letra">Eclipz Games</span>
+        </a>
+        <p>A sua central para descobrir, organizar e jogar seus títulos favoritos.</p>
+        <p class="footer-note">A Eclipz é uma loja de demonstração. Preços e avaliações são ilustrativos, e nenhuma compra é cobrada.</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Links do rodapé">
+        <h2>Explore</h2>
+        <a href="#loja">Loja</a>
+        <a href="jogos.html" style="color: #66c0f4; font-weight: 600;"><img src="./img/logo.svg" alt="" aria-hidden="true" style="width: 18px; height: 18px; object-fit: contain; vertical-align: middle; margin-right: 4px;">Todos os Jogos</a>
+        <a href="#biblioteca">Biblioteca</a>
+        <a href="#suporte">Suporte técnico</a>
+      </nav>
+
+      <div class="footer-contact">
+        <h2>Fale com a gente</h2>
+        <a href="https://wa.me/5511993287274?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Eclipz%20Games!" target="_blank" rel="noopener noreferrer">WhatsApp: +55 (11) 99328-7274</a>
+        <a href="mailto:contato@eclipz.example">contato@eclipz.example</a>
+        <div class="socials" aria-label="Redes sociais">
+          <a class="social social-instagram" href="https://www.instagram.com/eclipzgames" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram oficial @eclipzgames">
+            <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+          </a>
+          <a class="social social-youtube" href="https://www.youtube.com/@eclipzgames" target="_blank" rel="noopener noreferrer" aria-label="YouTube" title="Canal oficial no YouTube">
+            <i class="fa-brands fa-youtube" aria-hidden="true"></i>
+          </a>
+          <a class="social social-discord" href="https://discord.gg/eclipzgames" target="_blank" rel="noopener noreferrer" aria-label="Discord" title="Comunidade oficial no Discord">
+            <i class="fa-brands fa-discord" aria-hidden="true"></i>
+          </a>
+          <a class="social social-whatsapp" href="https://wa.me/5511993287274?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Eclipz%20Games!" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" title="Atendimento WhatsApp: +55 (11) 99328-7274">
+            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+          </a>
+          <a class="social social-eclipz" href="index.html" rel="noopener noreferrer" aria-label="Eclipz" title="Site oficial da Eclipz"><img src="./img/logo.svg" alt="" aria-hidden="true" style="width: 20px; height: 20px; object-fit: contain;"></a>
+          <a class="social social-x" href="https://x.com/eclipzgames" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" title="Perfil no X / Twitter">
+            <i class="fa-brands fa-x-twitter" aria-hidden="true"></i>
+          </a>
+          <a class="social social-twitch" href="https://www.twitch.tv/eclipzgames" target="_blank" rel="noopener noreferrer" aria-label="Twitch" title="Transmissões ao vivo na Twitch">
+            <i class="fa-brands fa-twitch" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="wrap footer-bottom">
+      <span>© 2026 Eclipz Games. Todos os direitos reservados.</span>
+      <span>Feito para quem gosta de jogar.</span>
+    </div>
+  </footer>
+  <script src="games-data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

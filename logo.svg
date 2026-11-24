@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Eclipz">
+  <title>Eclipz</title>
+  <defs>
+    <linearGradient id="eclipz-body" gradientUnits="userSpaceOnUse" x1="8" y1="56" x2="52" y2="12">
+      <stop offset="0" stop-color="#e5283b"/>
+      <stop offset="0.5" stop-color="#ff4d5d"/>
+      <stop offset="1" stop-color="#ffb14a"/>
+    </linearGradient>
+    <mask id="eclipz-cut" maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="64">
+      <rect width="64" height="64" fill="#fff"/>
+      <circle cx="35" cy="29" r="22" fill="#000"/>
+    </mask>
+  </defs>
+  <circle cx="32" cy="32" r="26" fill="none" stroke="#ff4d5d" stroke-opacity="0.1" stroke-width="1"/>
+  <circle cx="32" cy="32" r="26" fill="url(#eclipz-body)" mask="url(#eclipz-cut)"/>
+  <path transform="translate(20 22) rotate(-6 14 9)" fill="#ffbf4d" fill-rule="evenodd" d="M7 1.5H21C25.5 1.5 27 5 27.6 10L28 14C28.3 16.8 26.6 18 24.6 18C22.8 18 22 17 21 15.3L20 13.6C19.4 12.6 18.6 12 17.4 12H10.6C9.4 12 8.6 12.6 8 13.6L7 15.3C6 17 5.2 18 3.4 18C1.4 18-0.3 16.8 0 14L0.4 10C1 5 2.5 1.5 7 1.5ZM6.3 3.8h2.6v2.3h2.3v2.6h-2.3v2.3h-2.6v-2.3h-2.3v-2.6h2.3zM19.9 6.4a1.7 1.7 0 1 0 3.4 0a1.7 1.7 0 1 0-3.4 0zM22.9 9a1.7 1.7 0 1 0 3.4 0a1.7 1.7 0 1 0-3.4 0z"/>
+  <path d="M50.4 4.6Q50.4 13.6 59.4 13.6Q50.4 13.6 50.4 22.6Q50.4 13.6 41.4 13.6Q50.4 13.6 50.4 4.6Z" fill="#ffc65c"/>
+  <circle cx="50.4" cy="13.6" r="2.1" fill="#fff"/>
+</svg>
